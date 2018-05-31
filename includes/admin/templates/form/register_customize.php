@@ -1,10 +1,7 @@
 <div class="um-admin-metabox">
 
-	<?php foreach ( UM()->roles()->get_roles( __( 'Default', 'ultimate-member' ) ) as $key => $value ) {
-		$_um_register_role = UM()->query()->get_meta_value( '_um_register_role', $key );
-	    if ( ! empty( $_um_register_role ) )
-			$register_role = $_um_register_role;
-	}
+	<?php
+    $register_role = UM()->query()->get_meta_value( '_um_register_role', null, null, false );
 
 	UM()->admin_forms( array(
 		'class'		=> 'um-form-register-customize um-top-label',
@@ -24,6 +21,7 @@
 			array(
 				'id'		    => '_um_register_role',
 				'type'		    => 'select',
+				'multi'		    => true,
 				'label'    		=> __( 'Assign role to form', 'ultimate-member' ),
 				'value' 		=> ! empty( $register_role ) ? $register_role : 0,
 				'options'		=> UM()->roles()->get_roles( __( 'Default', 'ultimate-member' ) ),

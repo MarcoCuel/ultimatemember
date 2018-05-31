@@ -1,11 +1,7 @@
 <div class="um-admin-metabox">
 
 	<?php
-	foreach ( UM()->roles()->get_roles( __( 'All roles', 'ultimate-member' ) ) as $key => $value ) {
-	    $_um_profile_role = UM()->query()->get_meta_value( '_um_profile_role', $key );
-		if ( ! empty( $_um_profile_role ) )
-			$profile_role = $_um_profile_role;
-	}
+    $profile_role = UM()->query()->get_meta_value( '_um_profile_role', null, null, false );
 
 	UM()->admin_forms( array(
 		'class'		=> 'um-form-profile-customize um-top-label',
@@ -25,6 +21,7 @@
 			array(
 				'id'		    => '_um_profile_role',
 				'type'		    => 'select',
+				'multi'		    => true,
 				'label'    		=> __( 'Make this profile form role-specific', 'ultimate-member' ),
 				'tooltip'    	=> __( 'Please note if you make a profile form specific to a role then you must make sure that every other role is assigned a profile form', 'ultimate-member' ),
 				'value' 		=> ! empty( $profile_role ) ? $profile_role : 0,
